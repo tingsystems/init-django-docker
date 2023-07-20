@@ -197,7 +197,7 @@ En otra ventana de terminal, enumere los procesos de Docker en ejecución con el
     Killing test_web_1 ... done
     Killing test_db_1 ... done
     ```
-   * O, para un apagado más elegante, cambie a un shell diferente y ejecute
+   * O, cambie a un shell diferente y ejecute
    [docker compose down](https://docs.docker.com/engine/reference/commandline/compose_down/) desde la raiz del proyecto.
      ```console
       $ docker compose down
