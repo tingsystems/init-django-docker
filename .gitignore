@@ -100,3 +100,4 @@ docker-compose-local.yml
 docker-compose-production.yml
 .env
 db.sqlite3
+data
