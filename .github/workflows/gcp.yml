@@ -1,7 +1,7 @@
 name: Build and Push Image to Google Cloud Platform
 on:
   push:
-    branches: [ main ]
+    branches: [ testgcp ]
 
 jobs:
   build-push-gcr:

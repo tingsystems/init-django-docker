@@ -1,7 +1,7 @@
 name: Continues deployment for service
 on:
   push:
-    branches: [main]
+    branches: [testdg]
 
 jobs:
   build:
