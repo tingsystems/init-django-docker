@@ -1,0 +1,44 @@
+name: Build and Push Image to Google Cloud Platform
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-push-gcr:
+    name: Build and Push to GCP
+    runs-on: ubuntu-latest
+    env:
+      SERVICE: api
+      IMAGE_NAME: api
+      PROJECT_ID: taki-41b6b
+      BUCKET_NAME: bucket
+      ARTIFACT: us-central1-docker.pkg.dev
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+        project_id: ${{ env.PROJECT_ID }}
+
+    - name: Build Docker Image
+      run: docker build -t $IMAGE_NAME:latest .
+
+    - name: Configure Docker Client
+      run: |-
+        gcloud auth configure-docker $ARTIFACT --quiet
+
+    - name: Push Docker Image to Artifact Registry
+      run: |-
+        docker tag $IMAGE_NAME:latest $ARTIFACT/$PROJECT_ID/$BUCKET_NAME/$IMAGE_NAME:latest
+        docker push $ARTIFACT/$PROJECT_ID/$BUCKET_NAME/$IMAGE_NAME:latest
+
+    - id: 'deploy'
+      uses: google-github-actions/deploy-cloudrun@v1
+      with:
+        service:  ${{ env.SERVICE }}
+        image: ${{ env.ARTIFACT }}/$PROJECT_ID/$BUCKET_NAME/$IMAGE_NAME:latest
+
+    - name: 'Use output'
+      run: 'curl "${{ steps.deploy.outputs.url }}"'
