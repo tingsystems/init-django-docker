@@ -16,7 +16,6 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - DEBUG=1
-      - PROCESS_TYPE=server
     entrypoint: ./docker-entrypoint.sh
     depends_on:
       - db
