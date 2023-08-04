@@ -1,3 +1,6 @@
+# Presentacion del curso
+[Presentacion](https://docs.google.com/presentation/d/1UMVlVxcdGMVrvmDMt-5Mi1nsH81xQn0TW7TJI5lDRyI/edit?usp=sharing)
+
 # Inicio rapido: Docker, docker compose y Django
 
 Esta guia nos muestra como iniciar un proyecto nuevo de Django apoyandonos con Docker y docker compose.
